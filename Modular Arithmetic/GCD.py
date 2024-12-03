@@ -1,17 +1,20 @@
-def euclid_gcd(x, y):
-    if x < y:
-        return euclid_gcd(y, x)
+import math
 
-    while y != 0:
-        (x, y) = (y, x % y)
+#https://hackmd.io/@ADP/r1JV8qFk0?utm_source=preview-mode&utm_medium=rec#Cryptohack-MODULAR-ARITHMETIC
 
-    print("\n[+] GCD: {}".format(x))
-    return x
+#Using Euclid's algorithm
+print(math.gcd(66528, 52920))
 
-# a = 12
-# b = 8
+#Extended Euclid's algorithm
+#Using the two primes p = 26513, q = 32321, find the integers u,v such that
+#p * u + q * v = gcd(p,q)
 
-a = 66528
-b = 52920
+def egcd(a, b) :
+    if a == 0:
+        return b, 0, 1
+    else:
+        gcd, x, y = egcd(b % a, a)
+        return gcd, y - (b // a) * x, x
 
-euclid_gcd(a, b) #1512
+gcd, u, v =egcd(26513, 32321)
+print(min(u, v))
